@@ -158,10 +158,62 @@ public class DFA implements fa.dfa.DFAInterface {
         // returned else returns null.
         return from.getNextState(onSymb);
     }
+    /**
+	 * Construct the textual representation of the DFA, for example
+	 * A simple two state DFA
+	 * Q = { a b }
+	 * Sigma = { 0 1 }
+	 * delta =
+	 *		0	1	
+	 *	a	a	b	
+	 *	b	a	b	
+	 * q0 = a
+	 * F = { b }
+	 * 
+	 * The order of the states and the alphabet is the order
+	 * in which they were instantiated in the DFA.
+	 * @return String representation of the DFA
+	 */
 
     @Override
     public String toString() {
-        return null;
+        //StringBuilder will help us build the string
+        StringBuilder build = new StringBuilder();
+        
+        // Constructing Q
+        build.append("Q =  { ");
+        for (DFAState s : stateSet){
+            build.append(s.getName() + " ");
+        }
+        build.append("}\n");
+
+        // Constructing sigma = Alphabet
+        build.append("Sigma = { ");
+        for (Character c : alphabetSet){
+            build.append(c  + " ");
+        }
+        build.append("}\n");
+
+        build.append("delta =  \n");
+        build.append("\t\t");
+
+        for (Character c : alphabetSet){
+            build.append(c  + "\t");
+        }
+
+        build.append("\n");
+        for(DFAState s : stateSet){
+            build.append("\t" + s.getName());
+
+            for(Character c : alphabetSet) {
+                build.append("\t" + s.getNextState(c));
+            }
+            build.append("\n");
+        }
+
+
+
+        return build.toString();
     }
 
 }
