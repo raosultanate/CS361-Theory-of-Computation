@@ -80,7 +80,7 @@ public class DFA implements fa.dfa.DFAInterface {
     // Returns the state if it exists in the stateSet
     public DFAState get_DFAState(String name) {
         for (DFAState s : stateSet) {
-            if (s.getName() == name) {
+            if (s.getName().equals(name)) {
                 return s;
             }
         }
@@ -96,7 +96,7 @@ public class DFA implements fa.dfa.DFAInterface {
         // This is equivalent to building transition table.
 
         for (DFAState s : stateSet) {
-            if (s.getName() == fromState) {
+            if (s.getName().equals(fromState)) {
                 // Set the transition here. From this state to the other state.
                 s.toNextState(onSymb, get_DFAState(toState));
 
@@ -158,60 +158,55 @@ public class DFA implements fa.dfa.DFAInterface {
         // returned else returns null.
         return from.getNextState(onSymb);
     }
-    /**
-	 * Construct the textual representation of the DFA, for example
-	 * A simple two state DFA
-	 * Q = { a b }
-	 * Sigma = { 0 1 }
-	 * delta =
-	 *		0	1	
-	 *	a	a	b	
-	 *	b	a	b	
-	 * q0 = a
-	 * F = { b }
-	 * 
-	 * The order of the states and the alphabet is the order
-	 * in which they were instantiated in the DFA.
-	 * @return String representation of the DFA
-	 */
 
     @Override
     public String toString() {
-        //StringBuilder will help us build the string
+        // StringBuilder will help us build the string
         StringBuilder build = new StringBuilder();
-        
+
         // Constructing Q
         build.append("Q =  { ");
-        for (DFAState s : stateSet){
+        for (DFAState s : stateSet) {
             build.append(s.getName() + " ");
         }
         build.append("}\n");
 
         // Constructing sigma = Alphabet
         build.append("Sigma = { ");
-        for (Character c : alphabetSet){
-            build.append(c  + " ");
+        for (Character c : alphabetSet) {
+            build.append(c + " ");
         }
         build.append("}\n");
 
+        // Constructing delta
         build.append("delta =  \n");
         build.append("\t\t");
 
-        for (Character c : alphabetSet){
-            build.append(c  + "\t");
+        for (Character c : alphabetSet) {
+            build.append(c + "\t");
         }
 
         build.append("\n");
-        for(DFAState s : stateSet){
+        for (DFAState s : stateSet) {
             build.append("\t" + s.getName());
 
-            for(Character c : alphabetSet) {
+            for (Character c : alphabetSet) {
                 build.append("\t" + s.getNextState(c));
             }
             build.append("\n");
         }
 
+        // Constructing q0
+        build.append("q0 = ");
+        build.append(initialState.getName() + "\n");
 
+        // Constructing F
+        build.append("F = { ");
+        for (DFAState s : finalStateSet) {
+            build.append(s + " ");
+        }
+
+        build.append("}\n");
 
         return build.toString();
     }
