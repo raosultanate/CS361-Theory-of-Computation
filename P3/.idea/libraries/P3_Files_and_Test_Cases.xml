@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="P3-Files_and_Test_Cases">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/CS361FAdocs.zip!/" />
+      <root url="jar://$PROJECT_DIR$/CS361FA.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
